@@ -5,10 +5,11 @@ import checks.RegistrationPageChecks;
 import com.demoqa.utils.Fields;
 import components.CalendarComponent;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 
-public class RegistrationWithGeneratedDataTests extends TestBase {
+public class RegistrationTests extends RemoteTestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
     RegistrationPageChecks registrationChecks = new RegistrationPageChecks();
@@ -16,7 +17,8 @@ public class RegistrationWithGeneratedDataTests extends TestBase {
     Fields fields = new Fields();
 
 
-    @DisplayName("Registration test with usage of generated data as a homework for lesson #8")
+    @DisplayName("Registration test with usage of generated data")
+    @Tag("remote")
     @Test
     void userRegistrationTest() {
         registrationPage.openPage()
