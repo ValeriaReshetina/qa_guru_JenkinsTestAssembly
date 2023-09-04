@@ -32,7 +32,7 @@ public class RemoteTestBase {
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         Map<String, Object> selenoidOptions = new HashMap<>();
         selenoidOptions.put("enableVNC", true);
-        selenoidOptions.put("enableVideo", false);
+        selenoidOptions.put("enableVideo", true);
         capabilities.setCapability("selenoid:options", selenoidOptions);
         Configuration.browserCapabilities = capabilities;
     }
