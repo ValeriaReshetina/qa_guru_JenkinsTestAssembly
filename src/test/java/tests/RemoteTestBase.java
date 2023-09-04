@@ -3,7 +3,9 @@ package tests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -17,8 +19,8 @@ import static org.asynchttpclient.util.HttpConstants.Methods.OPTIONS;
 
 public class RemoteTestBase {
 
-    @BeforeEach
-    void addListener() {
+    @BeforeAll
+    static void addListener() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
         Configuration.baseUrl = "https://demoqa.com";
@@ -37,8 +39,8 @@ public class RemoteTestBase {
         Configuration.browserCapabilities = capabilities;
     }
 
-    @AfterEach
-    void addAttachments() {
+    @AfterAll
+    static void addAttachments() {
         screenshotAs("Last screenshot");
         pageSource();
         browserConsoleLogs();
