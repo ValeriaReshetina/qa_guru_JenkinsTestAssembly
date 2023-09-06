@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
 
+import static io.qameta.allure.Allure.step;
+
 public class RegistrationTests extends RemoteTestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
@@ -21,34 +23,44 @@ public class RegistrationTests extends RemoteTestBase {
     @Tag("remote")
     @Test
     void userRegistrationTest() {
-        registrationPage.openPage()
-                .removeBanner()
-                .setFirstName(fields.userFirstName)
-                .setLastName(fields.userLastName)
-                .setUserEmail(fields.userEmail)
-                .setGender(fields.userGender)
-                .setUserMobileNumber(fields.userMobileNumber);
+        step("Page opening", () -> {
+            registrationPage.openPage().removeBanner();
+        });
 
-        calendarComponent.setBirthDate(fields.userBirthDay, fields.userBirthMonth, fields.userBirthYear);
+        step("Filling out the registration form", () -> {
+            registrationPage.
+                    setFirstName(fields.userFirstName).
+                    setLastName(fields.userLastName).
+                    setUserEmail(fields.userEmail).
+                    setGender(fields.userGender).
+                    setUserMobileNumber(fields.userMobileNumber);
 
-        registrationPage.setSubjects(fields.userSubject)
-                .setHobbies(fields.userHobby)
-                .setAddress(fields.userAddress)
-                .uploadFile(fields.userPhoto)
-                .selectState(fields.userState)
-                .selectCity(fields.userCity)
-                .submitInformation();
+            calendarComponent.
+                    setBirthDate(fields.userBirthDay, fields.userBirthMonth, fields.userBirthYear);
 
-        registrationChecks
-                .checkResult("Student Name", fields.userFullName)
-                .checkResult("Student Email", fields.userEmail)
-                .checkResult("Gender", fields.userGender)
-                .checkResult("Mobile", fields.userMobileNumber)
-                .checkResult("Date of Birth", fields.userFullBirthday)
-                .checkResult("Subjects", fields.userSubject)
-                .checkResult("Hobbies", fields.userHobby)
-                .checkResult("Picture", fields.userPhoto)
-                .checkResult("Address", fields.userAddress)
-                .checkResult("State and City", fields.userStateAndCity);
+            registrationPage.
+                    setSubjects(fields.userSubject).
+                    setHobbies(fields.userHobby).
+                    uploadFile(fields.userPhoto).
+                    setAddress(fields.userAddress).
+                    selectState(fields.userState).
+                    selectCity(fields.userCity).
+                    submitInformation();
+        });
+
+        step("Checking fields of completed registration form", () -> {
+            registrationChecks.
+                    checkResult("Student Name", fields.userFullName).
+                    checkResult("Student Email", fields.userEmail).
+                    checkResult("Gender", fields.userGender).
+                    checkResult("Mobile", fields.userMobileNumber).
+                    checkResult("Date of Birth", fields.userFullBirthday).
+                    checkResult("Subjects", fields.userSubject).
+                    checkResult("Hobbies", fields.userHobby).
+                    checkResult("Picture", fields.userPhoto).
+                    checkResult("Address", fields.userAddress).
+                    checkResult("State and City", fields.userStateAndCity);
+
+        });
     }
 }
