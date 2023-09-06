@@ -11,7 +11,7 @@ import pages.RegistrationPage;
 
 import static io.qameta.allure.Allure.step;
 
-public class RegistrationTests extends RemoteTestBase {
+public class RegistrationRemoteTests extends RemoteTestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
     RegistrationPageChecks registrationChecks = new RegistrationPageChecks();
@@ -19,7 +19,7 @@ public class RegistrationTests extends RemoteTestBase {
     Fields fields = new Fields();
 
 
-    @DisplayName("Registration test with usage of generated data")
+    @DisplayName("Registration test for remote launch in Jenkins")
     @Tag("remote")
     @Test
     void userRegistrationTest() {

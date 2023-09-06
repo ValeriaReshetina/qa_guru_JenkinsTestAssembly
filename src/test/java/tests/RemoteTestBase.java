@@ -20,11 +20,12 @@ import static org.asynchttpclient.util.HttpConstants.Methods.OPTIONS;
 public class RemoteTestBase {
 
     @BeforeAll
-    static void addListener() {
+    static void beforeAll() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
 
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
+        Configuration.holdBrowserOpen = true;
         Configuration.pageLoadStrategy = "eager";
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
 
@@ -39,8 +40,13 @@ public class RemoteTestBase {
         Configuration.browserCapabilities = capabilities;
     }
 
-    @AfterAll
-    static void addAttachments() {
+    @BeforeEach
+    void addListener() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+    }
+
+    @AfterEach
+    void addAttachments() {
         screenshotAs("Last screenshot");
         pageSource();
         browserConsoleLogs();
