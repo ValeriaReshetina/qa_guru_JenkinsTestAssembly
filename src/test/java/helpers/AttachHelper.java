@@ -46,7 +46,8 @@ public class AttachHelper {
     }
 
     public static URL getVideoUrl() {
-        String videoUrl = "https://selenoid.autotests.cloud/video/" + sessionId() + ".mp4";
+        String webDriver = System.getProperty("webDriver");
+        String videoUrl = format("%svideo/" + sessionId() + ".mp4", webDriver);
         try {
             return new URL(videoUrl);
         } catch (MalformedURLException e) {
