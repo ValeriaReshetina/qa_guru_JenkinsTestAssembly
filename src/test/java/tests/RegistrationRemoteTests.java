@@ -18,7 +18,6 @@ public class RegistrationRemoteTests extends RemoteTestBase {
     CalendarComponent calendarComponent = new CalendarComponent();
     Fields fields = new Fields();
 
-
     @DisplayName("Registration test for remote launch in Jenkins")
     @Tag("remote")
     @Test
